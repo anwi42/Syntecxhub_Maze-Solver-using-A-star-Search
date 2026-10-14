@@ -240,7 +240,7 @@ class Visualizer:
         if cell not in self.visited:
             return
 
-        if self.maze.grid[cell[0]][cell[1]] == 1:
+        if not self.maze.is_walkable(cell[0], cell[1]):
             return
 
         r, c = cell

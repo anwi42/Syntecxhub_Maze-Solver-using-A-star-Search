@@ -41,6 +41,8 @@ def astar(maze, mode="manhattan"):
             return path, visited, elapsed, fgh_scores
 
         for neighbor in maze.neighbors(*current):
+            if not maze.is_walkable(neighbor[0], neighbor[1]):
+                continue
             tentative_g = g_score[current] + 1
             if tentative_g < g_score.get(neighbor, float('inf')):
                 came_from[neighbor] = current
@@ -48,7 +50,6 @@ def astar(maze, mode="manhattan"):
                 h = heuristic(neighbor, goal, mode)
                 f = tentative_g + h
 
-                # store scores
                 fgh_scores[neighbor] = {
                     "g": tentative_g,
                     "h": round(h, 2),
